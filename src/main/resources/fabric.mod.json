@@ -3,13 +3,21 @@
   "id": "beamphysics",
   "version": "${version}",
   "name": "BeamPhysics",
-  "description": "Soft-crash, raycast-suspension vehicle physics for Minecraft.",
+  "description": "Drivable cars with real physics: four independently simulated wheels on raycast suspension, engine and gearbox, crumpling bodywork and parts that tear off.",
   "authors": ["BeamPhysics contributors"],
   "license": "MIT",
+  "icon": "assets/beamphysics/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": ["dev.beamphysics.BeamPhysics"]
+    "main": ["dev.beamphysics.BeamPhysics"],
+    "client": ["dev.beamphysics.client.BeamPhysicsClient"]
   },
+  "mixins": [
+    {
+      "config": "beamphysics.client.mixins.json",
+      "environment": "client"
+    }
+  ],
   "depends": {
     "fabricloader": ">=0.15.0",
     "minecraft": "1.20.1",

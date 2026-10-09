@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "dev.beamphysics.client.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "CameraMixin",
+    "GameRendererMixin",
+    "KeyBindingMixin",
+    "LivingEntityRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

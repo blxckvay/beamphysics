@@ -1,0 +1,10 @@
+{
+  "engine": {
+    "subtitle": "subtitles.beamphysics.engine",
+    "sounds": [{"name": "beamphysics:engine", "attenuation_distance": 48}]
+  },
+  "skid": {
+    "subtitle": "subtitles.beamphysics.skid",
+    "sounds": [{"name": "beamphysics:skid", "attenuation_distance": 40}]
+  }
+}
