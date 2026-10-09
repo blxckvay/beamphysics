@@ -43,6 +43,8 @@ public final class AutoTest {
     private static int total;
     private static VehicleEntity car;
     private static double maxSpeed;
+    private static double maxSteerDeviation;
+    private static float startYaw;
     private static boolean done;
     private static final int GROUND = -60;
 
@@ -98,6 +100,8 @@ public final class AutoTest {
             BeamPhysics.LOG.error("[autotest] could not write report", e);
         }
         client.options.forwardKey.setPressed(false);
+        client.options.leftKey.setPressed(false);
+        client.options.rightKey.setPressed(false);
         client.scheduleStop();
     }
 
@@ -192,6 +196,12 @@ public final class AutoTest {
             case 5 -> {
                 maxSpeed = Math.max(maxSpeed, car.snapshot.velocity.length());
                 double z = car.getZ();
+                // a quick left-right flick to prove the steering path works
+                if (ticks == 1) startYaw = car.getYaw();
+                client.options.leftKey.setPressed(ticks >= 25 && ticks < 37);
+                client.options.rightKey.setPressed(ticks >= 37 && ticks < 51);
+                if (ticks < 80) maxSteerDeviation = Math.max(maxSteerDeviation, Math.abs(net.minecraft.util.math.MathHelper.wrapDegrees(car.getYaw() - startYaw)));
+                if (ticks == 80) check(maxSteerDeviation > 3, "A/D steer the car (heading moved " + String.format("%.0f", maxSteerDeviation) + " deg)");
                 if (z > 25.5 && z < 27.5) shot(client, "04_climbing_ledge_debug");
                 if (z > 44 || ticks > 400) {
                     check(z > 44, "drove over the one-block ledge (z=" + String.format("%.1f", z) + ")");
@@ -222,6 +232,10 @@ public final class AutoTest {
                     for (Entity e : client.world.getEntities()) if (e instanceof DetachedPartEntity) parts++;
                     check(d.detachedMask() != 0 && parts > 0, "parts were torn off (" + parts + " loose part entities)");
                     check(d.zones[DamageSystem.Z_REAR_CENTER] < 0.05, "rear of the car is undamaged");
+                    Entity serverCar = client.getServer().getOverworld().getEntityById(car.getId());
+                    if (serverCar instanceof VehicleEntity sv) {
+                        check(sv.physicsMillis < 8, "physics cost per vehicle per tick: " + String.format("%.2f", sv.physicsMillis) + " ms");
+                    }
                     shot(client, "06_after_crash_chase");
                     VehicleCamera.mode = VehicleCamera.Mode.THIRD_PERSON;
                 }
@@ -235,6 +249,20 @@ public final class AutoTest {
                 if (ticks > 95) look(client, car.getYaw(), 10);
                 if (ticks == 115) {
                     shot(client, "09_hood_camera");
+                    VehicleCamera.mode = VehicleCamera.Mode.THIRD_PERSON;
+                    IntegratedServer server = client.getServer();
+                    int id = car.getId();
+                    server.execute(() -> {
+                        if (server.getOverworld().getEntityById(id) instanceof VehicleEntity sv) sv.repair();
+                    });
+                }
+                if (ticks > 115) look(client, 150, 14);
+                if (ticks == 150) {
+                    DamageSystem d = car.physics().damage;
+                    float maxDent = 0;
+                    for (float f : d.lattice) maxDent = Math.max(maxDent, Math.abs(f));
+                    check(maxDent < 0.01 && d.detachedMask() == 0, "/vehicle repair restores the body and re-attaches parts");
+                    shot(client, "10_repaired");
                     ClientInput.sendAction(Net.ACTION_EXIT, car.getId());
                     next();
                 }
@@ -246,7 +274,7 @@ public final class AutoTest {
                     client.player.lookAt(net.minecraft.command.argument.EntityAnchorArgumentType.EntityAnchor.EYES, car.getPos().add(0, 0.8, 0));
                 }
                 if (ticks == 50) {
-                    shot(client, "10_on_foot_after_exit");
+                    shot(client, "11_on_foot_after_exit");
                     finish(client);
                 }
             }

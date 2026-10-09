@@ -47,6 +47,8 @@ public final class PhysicsSelfTest {
         independentSuspension();
         stepClimb();
         hill();
+        ledgeAtSpeed();
+        rollingTerrain();
         cliff();
         wallCrash();
         reverse();
@@ -192,6 +194,42 @@ public final class PhysicsSelfTest {
         }
         check(s.car.origin().y > 10, "climbs the hill (y=" + String.format("%.1f", s.car.origin().y) + ")");
         check(s.car.rotation.up().y > 0.7, "still on its wheels");
+    }
+
+    static void ledgeAtSpeed() throws Exception {
+        System.out.println("== one-block ledge taken at speed");
+        Sim s = new Sim(config());
+        s.height = (x, z) -> (z >= 60 && z < 72) ? 1 : 0;
+        s.place(0.5, 0.5, 0);
+        double minUp = 1;
+        for (int i = 0; i < 20 * 14; i++) {
+            s.input.forward = s.car.speed() < 12 ? 1 : 0;
+            s.step();
+            if (s.car.origin().z > 55) minUp = Math.min(minUp, s.car.rotation.up().y);
+        }
+        check(s.car.origin().z > 80, "clears the ledge at ~43 km/h (z=" + String.format("%.0f", s.car.origin().z) + ")");
+        check(minUp > 0.6, "stays on its wheels (min up " + String.format("%.2f", minUp) + ")");
+    }
+
+    static void rollingTerrain() throws Exception {
+        System.out.println("== rolling block terrain at ~36 km/h for 60 s");
+        Sim s = new Sim(config());
+        s.height = (x, z) -> (int) Math.round(3 * Math.sin(x / 14.0) + 3 * Math.sin(z / 17.0) + Math.sin((x + z) / 9.0)) + 8;
+        s.place(0.5, 0.5, 0);
+        double dist = 0, minUp = 1;
+        V3 last = s.car.origin();
+        for (int i = 0; i < 20 * 60; i++) {
+            s.input.forward = s.car.speed() < 10 ? 1 : 0.1;
+            s.input.steer = Math.sin(i / 60.0) * 0.25;
+            s.step();
+            V3 o = s.car.origin();
+            dist += o.distance(last);
+            last = o;
+            minUp = Math.min(minUp, s.car.rotation.up().y);
+        }
+        check(dist / 60 * 3.6 > 15, "keeps moving over block hills (average " + String.format("%.0f", dist / 60 * 3.6) + " km/h)");
+        check(minUp > 0.3, "never rolls over (min up " + String.format("%.2f", minUp) + ")");
+        check(Integer.bitCount(s.car.damage.detachedMask()) == 0, "no parts fall off from ordinary off-road driving");
     }
 
     static void cliff() throws Exception {

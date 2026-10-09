@@ -67,6 +67,8 @@ public class VehicleEntity extends Entity {
     private long restFingerprint;
     private float punchDamage;
     private int punchAge;
+    /** Smoothed cost of one server tick of this vehicle, for profiling. */
+    public double physicsMillis;
 
     // ---- client side
     public VehicleSnapshot prevSnapshot, snapshot, pendingSnapshot;
@@ -168,6 +170,7 @@ public class VehicleEntity extends Entity {
         if (hasDriver && (input.forward > 0 || input.backward > 0 || input.steer != 0)) p.wake();
 
         // world snapshot
+        long started = System.nanoTime();
         V3 o = p.origin();
         double reach = 4.5 + p.speed() * 0.06;
         if (p.resting) {
@@ -178,7 +181,7 @@ public class VehicleEntity extends Entity {
                 restFingerprint = fp;
             }
         } else {
-            TerrainSampler.sample(getWorld(), o.x, o.y + 0.5, o.z, reach, 4.5 + Math.max(0, -p.linearVelocity.y) * 0.06, 3.5, terrain);
+            TerrainSampler.sample(getWorld(), o.x, o.y + 0.5, o.z, reach, 3.2 + Math.max(0, -p.linearVelocity.y) * 0.06, 3.5 + Math.max(0, p.linearVelocity.y) * 0.06, terrain);
             restFingerprint = TerrainSampler.fingerprint(terrain);
         }
 
@@ -186,6 +189,7 @@ public class VehicleEntity extends Entity {
             applyFluids(p);
             p.tick(0.05, input, terrain);
         }
+        physicsMillis += ((System.nanoTime() - started) / 1e6 - physicsMillis) * 0.05;
 
         o = p.origin();
         setPosition(o.x, o.y, o.z);

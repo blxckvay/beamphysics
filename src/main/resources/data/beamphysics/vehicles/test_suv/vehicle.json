@@ -126,7 +126,7 @@
       4,
       9
     ],
-    "minImpactSpeed": 3.0,
+    "minImpactSpeed": 4.0,
     "deformPerSpeed": 0.034,
     "maxDeform": 0.55,
     "deformRadius": 1.35,
@@ -313,8 +313,8 @@
     ],
     "hood": [
       0,
-      1.32,
-      1.05
+      1.46,
+      0.98
     ],
     "chaseDistance": 7.5,
     "chaseHeight": 2.6,

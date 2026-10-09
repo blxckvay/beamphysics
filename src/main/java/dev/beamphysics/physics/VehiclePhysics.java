@@ -259,7 +259,7 @@ public final class VehiclePhysics {
                 w.hub = mount.addScaled(up, -cfg.suspension.length * 0.5);
                 continue;
             }
-            suspension.cast(w, terrain, mount, up, wf, up.cross(wf));
+            suspension.cast(w, terrain, mount, up, wf, up.cross(wf), velocityAt(mount).dot(wf));
             if (w.contact) {
                 wheelsOnGround++;
                 groundRef = Math.min(groundRef, w.groundY);
@@ -284,17 +284,22 @@ public final class VehiclePhysics {
         }
 
         // ---- 3. drivetrain -----------------------------------------------------------
+        // Torque goes where the grip is (limited-slip behaviour): each driven wheel is weighted by its
+        // load, so a wheel hanging in the air neither steals the torque nor over-revs the engine.
         double ratio = transmission.ratio();
-        double drivenOmega = 0, drivenInertia = 0;
+        double[] driveWeight = new double[4];
+        double weightSum = 0, drivenOmega = 0, drivenInertia = 0;
         int drivenCount = 0;
         for (int i = 0; i < 4; i++) {
-            if (cfg.isDriven(i) && !wheels[i].detached) {
-                drivenOmega += wheels[i].wheelAngularVelocity;
-                drivenInertia += wheels[i].inertia;
-                drivenCount++;
-            }
+            if (!cfg.isDriven(i) || wheels[i].detached) continue;
+            double load = wheels[i].contact ? wheels[i].springForce / staticWheelLoad : 0;
+            driveWeight[i] = cfg.driveShare(i) * (0.04 + Math.min(2.0, load));
+            weightSum += driveWeight[i];
+            drivenOmega += wheels[i].wheelAngularVelocity * driveWeight[i];
+            drivenInertia += wheels[i].inertia;
+            drivenCount++;
         }
-        if (drivenCount > 0) drivenOmega /= drivenCount;
+        if (weightSum > 0) drivenOmega /= weightSum;
 
         double engineTorque = engine.torque(throttle, damage.enginePowerFactor());
         engine.omega += engineTorque / cfg.engine.inertia * h;
@@ -313,8 +318,6 @@ public final class VehiclePhysics {
         }
         engine.update(h, damage);
         double wheelTorqueTotal = clutchTorque * ratio * cfg.gearbox.efficiency;
-        double shareSum = 0;
-        for (int i = 0; i < 4; i++) if (!wheels[i].detached) shareSum += cfg.driveShare(i);
 
         // ---- 4. tyres ------------------------------------------------------------------
         V3 force = new V3(0, -mass * GRAVITY, 0);
@@ -322,7 +325,7 @@ public final class VehiclePhysics {
         for (int i = 0; i < 4; i++) {
             WheelPhysics w = wheels[i];
             if (w.detached) continue;
-            double drive = shareSum > 0 ? wheelTorqueTotal * cfg.driveShare(i) / shareSum : 0;
+            double drive = weightSum > 0 ? wheelTorqueTotal * driveWeight[i] / weightSum : 0;
             double brakeT = brake * cfg.brakes.maxTorque * (i < 2 ? cfg.brakes.frontBias : 1 - cfg.brakes.frontBias);
             // simple ABS so that braking keeps the car steerable
             if (brake > 0 && w.contact && w.slipRatio < -0.18 && Math.abs(forwardSpeed()) > 3) brakeT *= 0.25;
@@ -367,7 +370,7 @@ public final class VehiclePhysics {
             WheelPhysics w = wheels[i];
             if (!w.contact || w.rawCompression <= cfg.suspension.travel) continue;
             // the stop acts along the suspension axis: it lifts the body instead of blocking it
-            V3 axis = up.add(w.normal).normalizeOr(up);
+            V3 axis = up;
             V3 r = w.contactPoint.sub(comPosition);
             double vn = linearVelocity.add(angularVelocity.cross(r)).dot(axis);
             if (vn < 0) {
@@ -376,6 +379,16 @@ public final class VehiclePhysics {
                 if (-vn > 5.5) {
                     damage.damageSuspension(i, (-vn - 5.5) * 1.6);
                     impacts.add(new Impact(w.contactPoint, -vn * 0.6));
+                    if (-vn > 8.5) {
+                        // a landing this hard drives the wheel up into the arch and bends the body around it
+                        detachedScratch.clear();
+                        V3 arch = new V3(cfg.wheelX(i), cfg.suspension.mountHeight + 0.2, cfg.wheelZ(i));
+                        damage.applyImpact(arch, V3.Y, -vn * 0.75, 1.0, detachedScratch);
+                        for (int p : detachedScratch) {
+                            V3 anchor = toWorld(V3.of(cfg.damage.parts[p].anchor));
+                            detachments.add(new Detachment(p, anchor, velocityAt(anchor).scale(0.5).add(0, 2.5, 0)));
+                        }
+                    }
                     if (damage.checkWheelLoss(i)) detachWheel(i);
                 }
             }

@@ -5,6 +5,7 @@
   "client": [
     "CameraMixin",
     "GameRendererMixin",
+    "HeldItemRendererMixin",
     "KeyBindingMixin",
     "LivingEntityRendererMixin"
   ],

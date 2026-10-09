@@ -263,7 +263,7 @@ vehicle = {
     "brakes": {"maxTorque": 4200, "frontBias": 0.62, "handbrakeTorque": 6500},
     "damage": {
         "boundsMin": [-1.08, -0.05, -2.55], "boundsMax": [1.08, 1.75, 2.55], "lattice": [5, 4, 9],
-        "minImpactSpeed": 3.0, "deformPerSpeed": 0.034, "maxDeform": 0.55, "deformRadius": 1.35,
+        "minImpactSpeed": 4.0, "deformPerSpeed": 0.034, "maxDeform": 0.55, "deformRadius": 1.35,
         "partDamagePerSpeed": 6.0, "radiatorZ": 2.1,
         "parts": [
             {"name": "hood", "anchor": [0, 1.05, 1.65], "health": 100, "detachThreshold": 85, "radius": 1.5, "mass": 18, "wheel": -1},
@@ -281,7 +281,7 @@ vehicle = {
         {"x": SX, "y": -0.27, "z": -0.05, "driver": True},
         {"x": -SX, "y": -0.27, "z": -0.05, "driver": False}
     ],
-    "cameras": {"interior": [SX, 1.36, -0.02], "hood": [0, 1.32, 1.05], "chaseDistance": 7.5, "chaseHeight": 2.6, "orbitDistance": 8.0},
+    "cameras": {"interior": [SX, 1.36, -0.02], "hood": [0, 1.46, 0.98], "chaseDistance": 7.5, "chaseHeight": 2.6, "orbitDistance": 8.0},
     "collision": []
 }
 

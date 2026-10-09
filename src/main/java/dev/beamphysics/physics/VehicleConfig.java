@@ -121,7 +121,7 @@ public final class VehicleConfig {
         public double[] boundsMax = {1.08, 1.75, 2.45};
         public int[] lattice = {5, 4, 9};
         /** Closing speed (m/s) below which nothing is damaged. */
-        public double minImpactSpeed = 3.0;
+        public double minImpactSpeed = 4.0;
         /** Metres of crush per m/s over the threshold. */
         public double deformPerSpeed = 0.034;
         public double maxDeform = 0.55;
@@ -162,7 +162,7 @@ public final class VehicleConfig {
 
     public static final class Cameras {
         public double[] interior = {0.42, 1.36, 0.02};
-        public double[] hood = {0, 1.42, 1.05};
+        public double[] hood = {0, 1.46, 0.98};
         public double chaseDistance = 7.5;
         public double chaseHeight = 2.6;
         public double orbitDistance = 8.0;
