@@ -1,0 +1,20 @@
+PASS game reached the title screen with the mod loaded
+PASS singleplayer world started
+PASS player is seated in the vehicle on the client
+PASS client receives physics state packets
+PASS vehicle model loaded (2718 quads)
+PASS all four wheels found the ground (4)
+PASS engine starts on the R action (rpm 895)
+PASS A/D steer the car (heading moved 54 deg)
+FAIL drove over the one-block ledge (z=-54.0)
+PASS did not fall through the ground
+PASS accelerated under throttle (max 161 km/h)
+FAIL wall impact produced front damage on the client
+PASS body geometry is deformed (max dent 0.18 m)
+FAIL parts were torn off (0 loose part entities)
+FAIL rear of the car is undamaged
+PASS physics cost per vehicle per tick: 2.95 ms
+PASS /vehicle repair restores the body and re-attaches parts
+PASS player can leave the vehicle
+PASS vehicle stays in the world after the driver leaves
+RESULT: 4 FAILED

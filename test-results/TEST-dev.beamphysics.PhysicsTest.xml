@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.beamphysics.PhysicsTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-09T19:21:29" hostname="runnervmmprz5" time="12.07">
+  <properties/>
+  <testcase name="physicsScenarios()" classname="dev.beamphysics.PhysicsTest" time="12.07"/>
+  <system-out><![CDATA[== settle on flat ground
+  t= 4.00 pos=(   0.50   0.40    0.54) v=  0.00 m/s (  0.0 km/h) rpm=  904 gear=1 up.y= 1.00 wheels=4
+  [ok]   ride height 0.400 ~ 0.400
+  [ok]   comes to rest and sleeps
+  [ok]   stays level
+  [ok]   wheel 0 on ground, compression 0.159
+  [ok]   wheel 1 on ground, compression 0.159
+  [ok]   wheel 2 on ground, compression 0.142
+  [ok]   wheel 3 on ground, compression 0.142
+== acceleration, gears, braking
+  t= 1.05 pos=(   0.50   0.40    0.55) v=  0.18 m/s (  0.7 km/h) rpm= 1223 gear=1 up.y= 1.00 wheels=4
+  t= 3.05 pos=(   0.50   0.41   12.90) v= 12.19 m/s ( 43.9 km/h) rpm= 5979 gear=1 up.y= 1.00 wheels=4
+  t= 5.05 pos=(   0.50   0.42   44.68) v= 19.88 m/s ( 71.6 km/h) rpm= 5389 gear=2 up.y= 1.00 wheels=4
+  t= 7.05 pos=(   0.50   0.41   90.41) v= 25.60 m/s ( 92.2 km/h) rpm= 4461 gear=3 up.y= 1.00 wheels=4
+  t= 9.05 pos=(   0.50   0.41  146.88) v= 30.72 m/s (110.6 km/h) rpm= 5298 gear=3 up.y= 1.00 wheels=4
+  t=11.05 pos=(   0.50   0.41  212.63) v= 34.41 m/s (123.9 km/h) rpm= 6247 gear=4 up.y= 1.00 wheels=4
+  t=13.05 pos=(   0.50   0.41  285.12) v= 37.94 m/s (136.6 km/h) rpm= 4706 gear=4 up.y= 1.00 wheels=4
+  t=15.05 pos=(   0.50   0.41  364.13) v= 41.00 m/s (147.6 km/h) rpm= 5075 gear=4 up.y= 1.00 wheels=4
+  t=17.05 pos=(   0.50   0.41  448.88) v= 43.67 m/s (157.2 km/h) rpm= 5394 gear=4 up.y= 1.00 wheels=4
+  t=19.05 pos=(   0.50   0.41  538.58) v= 45.96 m/s (165.5 km/h) rpm= 5667 gear=4 up.y= 1.00 wheels=4
+  t=21.00 pos=(   0.50   0.38  629.98) v= 47.54 m/s (171.1 km/h) rpm= 4492 gear=5 up.y= 1.00 wheels=4
+  [ok]   0-100 km/h in 6.9 s
+  [ok]   automatic gearbox shifted up to gear 5
+  [ok]   top speed after 20 s: 171 km/h
+  [ok]   tracks straight (drift 0.00 m)
+  t=27.75 pos=(   0.50   0.40  771.31) v=  0.60 m/s (  2.2 km/h) rpm=  895 gear=R up.y= 1.00 wheels=4
+  [ok]   braking from 171 km/h in 141 m (8.0 m/s2)
+  [ok]   nose dives under braking (2.5 deg)
+== cornering
+  t= 5.65 pos=(  20.61   0.40   57.29) v= 14.11 m/s ( 50.8 km/h) rpm= 2418 gear=3 up.y= 1.00 wheels=4
+  [ok]   turns left: heading changed 78 deg in 2.5 s
+  [ok]   body rolls in the corner (5.1 deg)
+  [ok]   does not flip in a normal corner
+  [ok]   handbrake locks the rear wheels
+  [ok]   rear steps out on the handbrake (slip 86 deg)
+== independent suspension on uneven blocks
+  t= 0.05 pos=(   0.50   0.42    0.50) v=  0.06 m/s (  0.2 km/h) rpm=  964 gear=1 up.y= 1.00 wheels=4 comp FL=0.13 FR=0.13 RL=0.13 RR=0.13
+  t= 1.05 pos=(   0.50   0.40    1.42) v=  1.79 m/s (  6.5 km/h) rpm= 1022 gear=1 up.y= 1.00 wheels=4 comp FL=0.15 FR=0.15 RL=0.15 RR=0.15
+  t= 2.05 pos=(   0.49   0.46    3.95) v=  2.93 m/s ( 10.5 km/h) rpm= 1643 gear=1 up.y= 1.00 wheels=4 comp FL=0.36 FR=0.09 RL=0.09 RR=0.15
+  t= 3.05 pos=(   0.37   0.78    6.87) v=  3.58 m/s ( 12.9 km/h) rpm= 1749 gear=1 up.y= 0.86 wheels=3 comp FL=0.21 FR=0.07 RL=0.00 RR=0.24
+  t= 4.05 pos=(   0.62   0.86   10.80) v=  3.99 m/s ( 14.4 km/h) rpm= 1680 gear=1 up.y= 0.80 wheels=4 comp FL=0.14 FR=0.18 RL=0.13 RR=0.17
+  t= 5.05 pos=(   0.96   0.86   14.70) v=  3.84 m/s ( 13.8 km/h) rpm= 1626 gear=1 up.y= 0.80 wheels=4 comp FL=0.14 FR=0.19 RL=0.12 RR=0.17
+  t= 6.05 pos=(   1.23   0.85   18.47) v=  3.72 m/s ( 13.4 km/h) rpm= 1574 gear=1 up.y= 0.79 wheels=4 comp FL=0.16 FR=0.21 RL=0.12 RR=0.17
+  t= 7.05 pos=(   1.29   0.85   22.15) v=  3.63 m/s ( 13.1 km/h) rpm= 1537 gear=1 up.y= 0.79 wheels=4 comp FL=0.15 FR=0.21 RL=0.11 RR=0.18
+  [ok]   body leans when one side is a block higher (38 deg)
+  [ok]   left/right suspension compress differently (0.36 m)
+  [ok]   keeps driving along the ledge (z=25.6)
+== climbing a full block step
+  t= 0.05 pos=(   0.50   0.42    0.50) v=  0.08 m/s (  0.3 km/h) rpm= 1035 gear=1 up.y= 1.00 wheels=4
+  t= 1.55 pos=(   0.50   0.40    3.59) v=  3.02 m/s ( 10.9 km/h) rpm= 1193 gear=1 up.y= 1.00 wheels=4
+  t= 3.05 pos=(   0.50   0.40    8.15) v=  3.13 m/s ( 11.3 km/h) rpm= 1349 gear=1 up.y= 1.00 wheels=4
+  t= 4.55 pos=(   0.50   0.92   12.35) v=  3.22 m/s ( 11.6 km/h) rpm= 1179 gear=1 up.y= 0.93 wheels=4
+  t= 6.05 pos=(   0.50   1.40   15.82) v=  3.00 m/s ( 10.8 km/h) rpm= 1181 gear=1 up.y= 1.00 wheels=4
+  t= 7.55 pos=(   0.50   1.40   20.37) v=  3.02 m/s ( 10.9 km/h) rpm= 1466 gear=1 up.y= 1.00 wheels=4
+  t= 9.05 pos=(   0.50   1.40   24.96) v=  3.12 m/s ( 11.2 km/h) rpm= 1294 gear=1 up.y= 1.00 wheels=4
+  t=10.55 pos=(   0.50   1.40   29.55) v=  3.11 m/s ( 11.2 km/h) rpm= 1293 gear=1 up.y= 1.00 wheels=4
+  [ok]   drives up a 1-block ledge at ~10 km/h (z=34.0, y=1.40)
+  [ok]   nose pitches up while climbing (26 deg)
+  [ok]   upright afterwards
+  t= 0.05 pos=(   0.50   0.42    0.50) v=  0.08 m/s (  0.3 km/h) rpm= 1035 gear=1 up.y= 1.00 wheels=4
+  t= 1.55 pos=(   0.50   0.40    3.89) v=  4.47 m/s ( 16.1 km/h) rpm= 2407 gear=1 up.y= 1.00 wheels=4
+  t= 3.05 pos=(   0.50   1.28   13.04) v=  4.80 m/s ( 17.3 km/h) rpm= 3660 gear=1 up.y= 0.88 wheels=2
+  t= 4.55 pos=(   0.58   1.39   22.11) v=  7.21 m/s ( 26.0 km/h) rpm= 1780 gear=2 up.y= 1.00 wheels=4
+  t= 6.05 pos=(   0.72   1.40   32.77) v=  7.16 m/s ( 25.8 km/h) rpm= 1767 gear=2 up.y= 1.00 wheels=4
+  t= 7.55 pos=(   0.86   1.40   43.44) v=  7.10 m/s ( 25.6 km/h) rpm= 1751 gear=2 up.y= 1.00 wheels=4
+  t= 9.05 pos=(   1.00   1.40   54.09) v=  7.04 m/s ( 25.4 km/h) rpm= 1738 gear=2 up.y= 1.00 wheels=4
+  t=10.55 pos=(   1.13   1.40   64.75) v=  6.98 m/s ( 25.1 km/h) rpm= 1725 gear=2 up.y= 1.00 wheels=4
+  [ok]   drives up a 1-block ledge at ~25 km/h (z=75.1, y=1.40)
+  [ok]   nose pitches up while climbing (31 deg)
+  [ok]   upright afterwards
+== block staircase hill (1 up per 3 forward)
+  t= 0.05 pos=(   0.50   0.42    0.50) v=  0.08 m/s (  0.3 km/h) rpm= 1074 gear=1 up.y= 1.00 wheels=4
+  t= 2.55 pos=(   0.50   1.83   11.62) v=  4.46 m/s ( 16.1 km/h) rpm= 4615 gear=1 up.y= 0.97 wheels=4
+  t= 5.05 pos=(   0.56   4.20   20.13) v=  4.38 m/s ( 15.8 km/h) rpm= 3036 gear=1 up.y= 0.94 wheels=4
+  t= 7.55 pos=(   0.58   7.30   27.25) v=  2.55 m/s (  9.2 km/h) rpm= 5250 gear=1 up.y= 0.95 wheels=0
+  t=10.05 pos=(   0.66   8.86   34.24) v=  3.64 m/s ( 13.1 km/h) rpm= 5091 gear=1 up.y= 0.92 wheels=4
+  t=12.55 pos=(   0.66  10.89   40.59) v=  2.63 m/s (  9.5 km/h) rpm= 4510 gear=1 up.y= 0.92 wheels=4
+  t=15.05 pos=(   0.66  12.41   50.69) v=  7.74 m/s ( 27.9 km/h) rpm= 2006 gear=2 up.y= 1.00 wheels=4
+  t=17.55 pos=(   0.67  12.40   69.51) v=  7.31 m/s ( 26.3 km/h) rpm= 1847 gear=2 up.y= 1.00 wheels=4
+  [ok]   climbs the hill (y=12.4)
+  [ok]   still on its wheels
+== one-block ledge taken at speed
+  [ok]   clears the ledge at ~43 km/h (z=138)
+  [ok]   stays on its wheels (min up 0.79)
+== rolling block terrain at ~36 km/h for 60 s
+  [ok]   keeps moving over block hills (average 26 km/h)
+  [ok]   never rolls over (min up 0.50)
+  [ok]   no parts fall off from ordinary off-road driving
+== driving off a cliff
+  t= 0.05 pos=(   0.50  14.42    0.50) v=  0.10 m/s (  0.4 km/h) rpm= 1204 gear=1 up.y= 1.00 wheels=4
+  t= 1.05 pos=(   0.50  14.41    3.44) v=  5.98 m/s ( 21.5 km/h) rpm= 3569 gear=1 up.y= 1.00 wheels=4
+  t= 2.05 pos=(   0.50  14.41   12.64) v= 12.10 m/s ( 43.6 km/h) rpm= 5946 gear=1 up.y= 1.00 wheels=4
+  t= 3.05 pos=(   0.50  14.41   26.43) v= 15.77 m/s ( 56.8 km/h) rpm= 4399 gear=2 up.y= 1.00 wheels=4
+  t= 4.05 pos=(   0.50  11.49   43.19) v= 18.61 m/s ( 67.0 km/h) rpm= 2827 gear=3 up.y= 0.94 wheels=0
+  t= 5.05 pos=(   0.48   0.33   60.30) v= 17.40 m/s ( 62.6 km/h) rpm= 1578 gear=4 up.y= 0.97 wheels=2
+  t= 6.05 pos=(   1.08   0.36   72.96) v=  9.99 m/s ( 35.9 km/h) rpm=  902 gear=3 up.y= 1.00 wheels=4
+  t= 7.05 pos=(   2.93   0.38   79.53) v=  3.59 m/s ( 12.9 km/h) rpm=  904 gear=R up.y= 1.00 wheels=4
+  t= 8.05 pos=(   3.36   0.40   82.30) v=  2.03 m/s (  7.3 km/h) rpm=  895 gear=R up.y= 1.00 wheels=4
+  t= 9.05 pos=(   3.30   0.40   83.75) v=  0.92 m/s (  3.3 km/h) rpm=  895 gear=R up.y= 1.00 wheels=4
+  t=10.05 pos=(   3.27   0.40   84.33) v=  0.34 m/s (  1.2 km/h) rpm=  895 gear=R up.y= 1.00 wheels=4
+  t=11.05 pos=(   3.26   0.40   84.55) v=  0.13 m/s (  0.5 km/h) rpm=  895 gear=R up.y= 1.00 wheels=4
+  t=12.05 pos=(   3.25   0.40   84.64) v=  0.06 m/s (  0.2 km/h) rpm=  895 gear=R up.y= 1.00 wheels=4
+  impact 13.1 m/s, max deformation 0.23 m, parts lost 0
+  [ok]   leaves the ground
+  [ok]   keeps angular velocity in the air (0.48 rad/s)
+  [ok]   lands at the bottom (y=0.40)
+  [ok]   body is visibly deformed
+  [ok]   comes to a stop without exploding
+== head-on wall crash at speed
+  t=20.00 pos=(  -0.10   0.40  117.74) v=  0.00 m/s (  0.0 km/h) rpm=  882 gear=1 up.y= 1.00 wheels=4
+  hit at 102 km/h, impact 28.3 m/s; zones FL=0.68 FC=0.68 FR=0.68 engine=0.08 radiator=0.00 coolant=0.66
+  detached: hood frontBumper 
+  [ok]   stopped by the wall (z=117.74)
+  [ok]   front zones damaged
+  [ok]   rear is untouched
+  [ok]   front is pushed in by 0.54 m
+  [ok]   tail geometry unchanged
+  [ok]   at least one part came off
+  [ok]   radiator damaged
+  [ok]   detachment events were emitted for the game layer
+== reverse
+  t= 4.00 pos=(   0.50   0.40  -39.23) v= 15.24 m/s ( 54.9 km/h) rpm= 6222 gear=R up.y= 1.00 wheels=4
+  [ok]   selects reverse from standstill
+  [ok]   drives backwards at 54.9 km/h
+  [ok]   W brakes, then drives forward again
+== surface friction
+  [ok]   ice gives far less traction than stone (2.2 m vs 25.6 m in 3 s)
+== cooling system
+  [ok]   healthy engine settles at 88 C
+  [ok]   broken radiator -> overheating -> power loss (171 C)
+  [ok]   engine eventually stops (after 37 s)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
