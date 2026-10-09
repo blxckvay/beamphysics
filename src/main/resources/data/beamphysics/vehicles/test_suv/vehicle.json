@@ -1,0 +1,324 @@
+{
+  "id": "test_suv",
+  "displayName": "Test SUV",
+  "mass": 1900,
+  "centerOfMass": [
+    0,
+    0.28,
+    0.08
+  ],
+  "inertiaBox": [
+    1.9,
+    1.3,
+    4.4
+  ],
+  "wheelBase": 2.9,
+  "trackWidth": 1.72,
+  "dragArea": 1.15,
+  "rollingResistance": 0.014,
+  "engine": {
+    "idleRPM": 850,
+    "redline": 6200,
+    "inertia": 0.28,
+    "torqueCurve": [
+      [
+        0,
+        180
+      ],
+      [
+        1000,
+        300
+      ],
+      [
+        2000,
+        380
+      ],
+      [
+        3000,
+        430
+      ],
+      [
+        4000,
+        440
+      ],
+      [
+        5000,
+        400
+      ],
+      [
+        6000,
+        330
+      ],
+      [
+        6500,
+        240
+      ]
+    ],
+    "engineBraking": 90,
+    "friction": 18,
+    "normalTemperature": 90,
+    "overheatTemperature": 115,
+    "failTemperature": 135
+  },
+  "gearbox": {
+    "reverse": -4.0,
+    "gears": [
+      4.2,
+      2.5,
+      1.65,
+      1.2,
+      0.92,
+      0.74
+    ],
+    "finalDrive": 5.3,
+    "efficiency": 0.9,
+    "shiftTime": 0.28,
+    "drive": "awd",
+    "frontTorqueSplit": 0.45,
+    "clutchMaxTorque": 780
+  },
+  "suspension": {
+    "mountHeight": 0.55,
+    "length": 0.6,
+    "travel": 0.36,
+    "springStiffness": 31000,
+    "damperCompression": 3000,
+    "damperRebound": 4200,
+    "antiRoll": 9000,
+    "stepAssistReach": 0.5,
+    "stepAssistHeight": 1.1
+  },
+  "wheels": {
+    "radius": 0.5,
+    "width": 0.32,
+    "mass": 28,
+    "inertia": 2.4,
+    "grip": 1.08,
+    "peakSlipAngleDeg": 8,
+    "slideGrip": 0.82,
+    "axleOffset": 0
+  },
+  "steering": {
+    "maxAngleDeg": 36,
+    "speedSensitivity": 14,
+    "minAngleDeg": 5,
+    "steeringSpeed": 2.6,
+    "steeringReturnSpeed": 4.2
+  },
+  "brakes": {
+    "maxTorque": 4200,
+    "frontBias": 0.62,
+    "handbrakeTorque": 6500
+  },
+  "damage": {
+    "boundsMin": [
+      -1.08,
+      -0.05,
+      -2.55
+    ],
+    "boundsMax": [
+      1.08,
+      1.75,
+      2.55
+    ],
+    "lattice": [
+      5,
+      4,
+      9
+    ],
+    "minImpactSpeed": 3.0,
+    "deformPerSpeed": 0.034,
+    "maxDeform": 0.55,
+    "deformRadius": 1.35,
+    "partDamagePerSpeed": 6.0,
+    "radiatorZ": 2.1,
+    "parts": [
+      {
+        "name": "hood",
+        "anchor": [
+          0,
+          1.05,
+          1.65
+        ],
+        "health": 100,
+        "detachThreshold": 85,
+        "radius": 1.5,
+        "mass": 18,
+        "wheel": -1
+      },
+      {
+        "name": "frontBumper",
+        "anchor": [
+          0,
+          0.36,
+          2.42
+        ],
+        "health": 70,
+        "detachThreshold": 60,
+        "radius": 1.5,
+        "mass": 12,
+        "wheel": -1
+      },
+      {
+        "name": "rearBumper",
+        "anchor": [
+          0,
+          0.36,
+          -2.42
+        ],
+        "health": 70,
+        "detachThreshold": 60,
+        "radius": 1.5,
+        "mass": 12,
+        "wheel": -1
+      },
+      {
+        "name": "doorFL",
+        "anchor": [
+          1.0,
+          0.65,
+          0.45
+        ],
+        "health": 90,
+        "detachThreshold": 75,
+        "radius": 1.15,
+        "mass": 22,
+        "wheel": -1
+      },
+      {
+        "name": "doorFR",
+        "anchor": [
+          -1.0,
+          0.65,
+          0.45
+        ],
+        "health": 90,
+        "detachThreshold": 75,
+        "radius": 1.15,
+        "mass": 22,
+        "wheel": -1
+      },
+      {
+        "name": "doorRL",
+        "anchor": [
+          1.0,
+          0.65,
+          -0.42
+        ],
+        "health": 90,
+        "detachThreshold": 75,
+        "radius": 1.15,
+        "mass": 20,
+        "wheel": -1
+      },
+      {
+        "name": "doorRR",
+        "anchor": [
+          -1.0,
+          0.65,
+          -0.42
+        ],
+        "health": 90,
+        "detachThreshold": 75,
+        "radius": 1.15,
+        "mass": 20,
+        "wheel": -1
+      },
+      {
+        "name": "tailgate",
+        "anchor": [
+          0,
+          1.0,
+          -2.3
+        ],
+        "health": 100,
+        "detachThreshold": 85,
+        "radius": 1.4,
+        "mass": 20,
+        "wheel": -1
+      },
+      {
+        "name": "wheelFL",
+        "anchor": [
+          0.86,
+          0.105,
+          1.45
+        ],
+        "health": 100,
+        "detachThreshold": 1000,
+        "radius": 1.0,
+        "mass": 28,
+        "wheel": 0
+      },
+      {
+        "name": "wheelFR",
+        "anchor": [
+          -0.86,
+          0.105,
+          1.45
+        ],
+        "health": 100,
+        "detachThreshold": 1000,
+        "radius": 1.0,
+        "mass": 28,
+        "wheel": 1
+      },
+      {
+        "name": "wheelRL",
+        "anchor": [
+          0.86,
+          0.105,
+          -1.45
+        ],
+        "health": 100,
+        "detachThreshold": 1000,
+        "radius": 1.0,
+        "mass": 28,
+        "wheel": 2
+      },
+      {
+        "name": "wheelRR",
+        "anchor": [
+          -0.86,
+          0.105,
+          -1.45
+        ],
+        "health": 100,
+        "detachThreshold": 1000,
+        "radius": 1.0,
+        "mass": 28,
+        "wheel": 3
+      }
+    ]
+  },
+  "seats": [
+    {
+      "x": 0.43,
+      "y": -0.27,
+      "z": -0.05,
+      "driver": true
+    },
+    {
+      "x": -0.43,
+      "y": -0.27,
+      "z": -0.05,
+      "driver": false
+    }
+  ],
+  "cameras": {
+    "interior": [
+      0.43,
+      1.36,
+      -0.02
+    ],
+    "hood": [
+      0,
+      1.32,
+      1.05
+    ],
+    "chaseDistance": 7.5,
+    "chaseHeight": 2.6,
+    "orbitDistance": 8.0
+  },
+  "collision": []
+}
