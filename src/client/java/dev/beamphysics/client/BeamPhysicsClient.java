@@ -27,6 +27,8 @@ public class BeamPhysicsClient implements ClientModInitializer {
             VehicleSounds.tick(client);
         });
 
+        if (AutoTest.enabled()) AutoTest.register();
+
         ClientPlayNetworking.registerGlobalReceiver(Net.STATE, (client, handler, buf, responseSender) -> {
             int id = Net.readEntityId(buf);
             VehicleSnapshot snapshot = Net.readState(buf);

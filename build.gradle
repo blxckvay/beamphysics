@@ -11,6 +11,15 @@ base {
 
 loom {
     splitEnvironmentSourceSets()
+    runs {
+        autoTest {
+            client()
+            name "Auto Test"
+            vmArg "-Dbeamphysics.autotest=true"
+            runDir "build/autotest"
+            ideConfigGenerated false
+        }
+    }
     mods {
         "beamphysics" {
             sourceSet sourceSets.main

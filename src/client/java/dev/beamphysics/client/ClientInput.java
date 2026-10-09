@@ -163,7 +163,7 @@ public final class ClientInput {
         ClientPlayNetworking.send(Net.INPUT, buf);
     }
 
-    private static void sendAction(int action, int entityId) {
+    public static void sendAction(int action, int entityId) {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeByte(action);
         buf.writeVarInt(entityId);
